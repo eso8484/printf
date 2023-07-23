@@ -18,7 +18,7 @@ void print_buffer(char buffer[], int *buff_ind)
  */
 int _printf(const char *format, ...)
 {
-	int counter, printed = 0;
+	int counter, print = 0, i = 0;
 	int buff_ind = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
@@ -26,11 +26,11 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 	va_start(list, format);
-	while(*format)
+	while(format[i] != '\0')
 	{
-		if (*format != '%')
+		if (format[i] != '%')
 		{
-			buffer[buff_ind++] = *format;
+			buffer[buff_ind++] = format[i];
 			if (buff_ind == BUFF_SIZE)
 				print_buffer(buffer, &buff_ind);
 			counter++;
@@ -38,8 +38,13 @@ int _printf(const char *format, ...)
 		else
 		{
 			print_buffer(buffer, &buff_ind);
-			counter++;
+			i++;
+			print = takeallprints(format, &i, list, buffer);
+			if (print == -1)
+				return (-1);
+			counter = print + counter;
 		}
+		i++;
 	}
 	print_buffer(buffer, &buff_ind);
 	va_end(list);
