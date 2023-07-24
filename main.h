@@ -20,6 +20,17 @@
  * @fmt: The format.
  * @fn: The function associated.
  */
+struct _print
+{
+char op;
+int (*fptr)(va_list);
+} get_op;
+
+/**
+* struct _print - A struct to hold the function pointer and format character
+* @op: The constant of format specifiers
+* @fptr: The function pointer
+*/
 struct fmt
 {
         char fmt;
