@@ -38,10 +38,13 @@ int _printf(const char *format, ...)
 		else
 		{
 			print_buffer(buffer, &buff_ind);
-			i++;
-			print = takeallprints(format, &i, list, buffer, flags, width, precision, size);
-			if (print == -1)
-				return (-1);
+			flags = get_flags(format, &i);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &i, list);
+			size = get_size(format, &i);
+			++i;
+			print = handle_print(format, &i, list, buffer,
+				flags, width, precision, size);
 			counter = print + counter;
 		}
 		i++;
