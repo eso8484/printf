@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 		{
 			print_buffer(buffer, &buff_ind);
 			i++;
-			print = takeallprints(format, &i, list, buffer);
+			print = takeallprints(format, &i, list, buffer, flags, width, precision, size);
 			if (print == -1)
 				return (-1);
 			counter = print + counter;
